@@ -7,9 +7,10 @@ class Movies extends Component {
   state = {
     movies: getMovies(),
     pageSize: 4,
+    currentPage: 1,
   };
   handlePageChange = (page) => {
-    console.log(page);
+    this.setState({ currentPage: page });
   };
   handleLike = (movie) => {
     const movies = [...this.state.movies];
@@ -25,6 +26,7 @@ class Movies extends Component {
   };
   render() {
     const { length: count } = this.state.movies;
+    const { currentPage, pageSize } = this.state;
     if (count === 0) return <h2>there are no movies in database</h2>;
 
     return (
@@ -72,6 +74,7 @@ class Movies extends Component {
           onPageChange={this.handlePageChange}
           itemsCount={count}
           pageSize={this.state.pageSize}
+          currentPage={this.state.currentPage}
         />
       </main>
     );
